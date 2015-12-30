@@ -48,3 +48,4 @@ script:
   - (cd renuo-cms-api && bin/check)
   - (cd renuo-cms-client && npm test)
 after_script: mv renuo-cms-client/node_modules client_node_modules
+
