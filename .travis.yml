@@ -5,10 +5,10 @@ cache:
   directories:
     - node_modules
     - client_node_modules
-    - $(npm config get prefix)/bin/bower
-    - $(npm config get prefix)/bin/tsd
-    - $(npm config get prefix)/bin/tslint
-    - $(npm config get prefix)/bin/gulp
+      # - $(npm config get prefix)/bin/bower
+      # - $(npm config get prefix)/bin/tsd
+      # - $(npm config get prefix)/bin/tslint
+      # - $(npm config get prefix)/bin/gulp
 addons:
   postgresql: '9.4'
   apt:
