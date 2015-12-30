@@ -28,6 +28,7 @@ before_install:
   - git clone https://github.com/renuo/renuo-cms-client.git
   - mv client_node_modules renuo-cms-client/node_modules || echo 'cache does not exist'
   - rm renuo-cms-client/npm-shrinkwrap.json
+  - nvm install
   - npm install -g bower tsd tslint gulp
 install:
   - (cd renuo-cms-api && bundle install --without production development --deployment --jobs=3 --retry=3)
