@@ -3,8 +3,8 @@ cache:
   bundler: true
   apt: true
   directories:
-    # - node_modules
-    # - client_node_modules
+    - node_modules
+    - client_node_modules
     # - $(npm config get prefix)/bin/bower
     # - $(npm config get prefix)/bin/tsd
     # - $(npm config get prefix)/bin/tslint
