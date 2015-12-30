@@ -33,6 +33,7 @@ before_install:
   - npm install -g protractor
   - webdriver-manager update --standalone --firefox
   - webdriver-manager start & 2>&1
+  - sleep 3
   - (cd renuo-cms-client && protractor e2e/protractor-config.js)
 install:
   - (cd renuo-cms-api && bundle install --without production development --deployment --jobs=3 --retry=3)
