@@ -1,0 +1,43 @@
+language: ruby
+cache:
+  bundler: true
+  apt: true
+  directories:
+    - renuo-cms-client/node_modules
+    - $(npm config get prefix)/bin/bower
+    - $(npm config get prefix)/bin/tsd
+    - $(npm config get prefix)/bin/tslint
+    - $(npm config get prefix)/bin/gulp
+addons:
+  postgresql: '9.4'
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - zsh
+      - g++4.8
+env:
+  global:
+    - CXX=g++-4.8
+    - secure: G8NSqBVJVX4mLrsWKDZh9eUMhlQrs/9z+9gAu8YC7mQ8ed0BlY4idrNI5vaD/+LsKSxEqhYO7U08Tn3KrtSo1sr7sSI47F1g/F8VCMXQW2eC89BiZh+9Td1qETvsW/jTFpF5QaQJBf5d6WBlpVp98KQOlLvUIL+Kyl08hhRmk/k=
+before_install:
+  - export TZ=Europe/Zurich
+  - export CHROME_BIN=chromium-browser
+  - git clone git@github.com:renuo/renuo-cms-api.git
+  - git clone git@github.com:renuo/renuo-cms-client.git
+  - rm renuo-cms-client/npm-shrinkwrap.json
+  - npm install -g bower tsd tslint gulp
+install:
+  - (cd renuo-cms-api && bundle install --without production development --deployment --jobs=3 --retry=3)
+  - (cd renuo-cms-client && npm install)
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - cp renuo-cms-api/config/database.travis.yml renuo-cms-api/config/database.yml
+  - cp renuo-cms-api/config/application.travis.yml renuo-cms-api/config/application.yml
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - echo {\"token\":\"$TSDRC_TOKEN\"} > .tsdrc
+  - tsd reinstall --save --overwrite
+script:
+  - (cd renuo-cms-api && bin/check)
+
