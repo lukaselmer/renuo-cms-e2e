@@ -26,7 +26,7 @@ before_install:
   - export CHROME_BIN=chromium-browser
   - git clone https://github.com/renuo/renuo-cms-api.git
   - git clone https://github.com/renuo/renuo-cms-client.git
-  - mv my_node_modules renuo-cms-client/node_modules
+  - mv client_node_modules renuo-cms-client/node_modules
   - rm renuo-cms-client/npm-shrinkwrap.json
   - npm install -g bower tsd tslint gulp
 install:
