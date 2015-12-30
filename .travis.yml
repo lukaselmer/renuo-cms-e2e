@@ -3,12 +3,12 @@ cache:
   bundler: true
   apt: true
   directories:
-    - node_modules
-    - client_node_modules
-    - $(npm config get prefix)/bin/bower
-      # - $(npm config get prefix)/bin/tsd
-      # - $(npm config get prefix)/bin/tslint
-      # - $(npm config get prefix)/bin/gulp
+    # - node_modules
+    # - client_node_modules
+    # - $(npm config get prefix)/bin/bower
+    # - $(npm config get prefix)/bin/tsd
+    # - $(npm config get prefix)/bin/tslint
+    # - $(npm config get prefix)/bin/gulp
 addons:
   postgresql: '9.4'
   apt:
@@ -26,7 +26,7 @@ before_install:
   - export CHROME_BIN=chromium-browser
   - git clone https://github.com/renuo/renuo-cms-api.git
   - git clone https://github.com/renuo/renuo-cms-client.git
-  - mv client_node_modules renuo-cms-client/node_modules
+  - mv client_node_modules renuo-cms-client/node_modules || echo 'cache does not exist'
   - rm renuo-cms-client/npm-shrinkwrap.json
   - npm install -g bower tsd tslint gulp
 install:
