@@ -42,7 +42,7 @@ before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - echo {\"token\":\"$TSDRC_TOKEN\"} > .tsdrc
-  - tsd reinstall --save --overwrite
+  - (cd renuo-cms-client && tsd reinstall --save --overwrite)
 script:
   - (cd renuo-cms-client && protractor e2e/protractor-config.js)
   - (cd renuo-cms-api && bin/check)
