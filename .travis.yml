@@ -24,14 +24,16 @@ env:
 before_install:
   - export TZ=Europe/Zurich
   - export CHROME_BIN=chromium-browser
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
   - git clone https://github.com/renuo/renuo-cms-api.git && (cd renuo-cms-api && git checkout $(cat ../renuo-cms-api-branch))
   - git clone https://github.com/renuo/renuo-cms-client.git && (cd renuo-cms-client && git checkout $(cat ../renuo-cms-client-branch))
   - mv client_node_modules renuo-cms-client/node_modules || echo 'cache does not exist'
   - rm renuo-cms-client/npm-shrinkwrap.json
   - nvm install
-  - npm install -g protractor@1.4.0
-  - webdriver-manager update --standalone
-  - webdriver-manager start & 2>&1
+  - npm install -g protractor
+  - webdriver-manager update --standalone --firefox
+  - webdriver-manager start 2>&1 &
   - sleep 3
   - (cd renuo-cms-client && protractor e2e/protractor-config.js)
   - npm install -g bower tsd tslint gulp
@@ -42,8 +44,6 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - cp renuo-cms-api/config/database.travis.yml renuo-cms-api/config/database.yml
   - cp renuo-cms-api/config/application.travis.yml renuo-cms-api/config/application.yml
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
   - echo {\"token\":\"$TSDRC_TOKEN\"} > .tsdrc
   - (cd renuo-cms-client && tsd reinstall --save --overwrite)
 script:
