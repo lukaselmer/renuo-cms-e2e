@@ -29,7 +29,7 @@ before_install:
   - mv client_node_modules renuo-cms-client/node_modules || echo 'cache does not exist'
   - rm renuo-cms-client/npm-shrinkwrap.json
   - nvm install
-  - npm install -g protractor
+  - npm install -g protractor@1.4.0
   - webdriver-manager update --standalone
   - webdriver-manager start & 2>&1
   - sleep 3
