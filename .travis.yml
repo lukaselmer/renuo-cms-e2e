@@ -15,7 +15,7 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - zsh
-      - g++4.8
+      - g++-4.8
 env:
   global:
     - CXX=g++-4.8
