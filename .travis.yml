@@ -24,8 +24,8 @@ env:
 before_install:
   - export TZ=Europe/Zurich
   - export CHROME_BIN=chromium-browser
-  - git clone https://github.com/renuo/renuo-cms-api.git && (cd renuo-cms-api && git checkout $(cat renuo-cms-api-branch))
-  - git clone https://github.com/renuo/renuo-cms-client.git && (cd renuo-cms-client && git checkout $(cat renuo-cms-client-branch))
+  - git clone https://github.com/renuo/renuo-cms-api.git && (cd renuo-cms-api && git checkout $(cat ../renuo-cms-api-branch))
+  - git clone https://github.com/renuo/renuo-cms-client.git && (cd renuo-cms-client && git checkout $(cat ../renuo-cms-client-branch))
   - mv client_node_modules renuo-cms-client/node_modules || echo 'cache does not exist'
   - rm renuo-cms-client/npm-shrinkwrap.json
   - nvm install
