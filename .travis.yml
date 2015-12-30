@@ -3,7 +3,8 @@ cache:
   bundler: true
   apt: true
   directories:
-    - renuo-cms-client/node_modules
+    - node_modules
+    - client_node_modules
     - $(npm config get prefix)/bin/bower
     - $(npm config get prefix)/bin/tsd
     - $(npm config get prefix)/bin/tslint
@@ -25,6 +26,7 @@ before_install:
   - export CHROME_BIN=chromium-browser
   - git clone https://github.com/renuo/renuo-cms-api.git
   - git clone https://github.com/renuo/renuo-cms-client.git
+  - mv my_node_modules renuo-cms-client/node_modules
   - rm renuo-cms-client/npm-shrinkwrap.json
   - npm install -g bower tsd tslint gulp
 install:
@@ -40,4 +42,6 @@ before_script:
   - tsd reinstall --save --overwrite
 script:
   - (cd renuo-cms-api && bin/check)
+  - (cd renuo-cms-client && npm test)
+after_script: mv renuo-cms-client/node_modules client_node_modules
 
