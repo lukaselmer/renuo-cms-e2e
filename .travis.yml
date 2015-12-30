@@ -31,7 +31,7 @@ before_install:
   - nvm install
   - npm install -g bower tsd tslint gulp
   - npm install -g protractor
-  - webdriver-manager update
+  - webdriver-manager update --standalone --firefox
 install:
   - (cd renuo-cms-api && bundle install --without production development --deployment --jobs=3 --retry=3)
   - (cd renuo-cms-client && npm install)
