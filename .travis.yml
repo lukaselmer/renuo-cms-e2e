@@ -30,7 +30,7 @@ before_install:
   - rm renuo-cms-client/npm-shrinkwrap.json
   - nvm install
   - npm install -g protractor
-  - webdriver-manager update --standalone --firefox
+  - webdriver-manager update --standalone
   - webdriver-manager start & 2>&1
   - sleep 3
   - (cd renuo-cms-client && protractor e2e/protractor-config.js)
