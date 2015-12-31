@@ -47,6 +47,7 @@ before_script:
 script:
   - cd renuo-cms-api && rails s &
   - cd renuo-cms-client && gulp travis-serve &
+  - sleep 3
   - (cd renuo-cms-client && protractor e2e/protractor-config.js)
   #  - (cd renuo-cms-api && bin/check)
   #  - (cd renuo-cms-client && npm test)
