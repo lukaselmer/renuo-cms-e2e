@@ -43,7 +43,7 @@ before_script:
 - echo {\"token\":\"$TSDRC_TOKEN\"} > .tsdrc
 - "(cd renuo-cms-client && tsd reinstall --save --overwrite)"
 script:
-- cd renuo-cms-api && rails s &
+- cd renuo-cms-api && gem install rails && rails s &
 - cd renuo-cms-client && gulp travis-serve &
 - sleep 3
 - "(cd renuo-cms-client && protractor e2e/protractor-config.js)"
