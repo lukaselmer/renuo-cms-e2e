@@ -3,53 +3,47 @@ cache:
   bundler: true
   apt: true
   directories:
-    - node_modules
-    - client_node_modules
-    # - $(npm config get prefix)/bin/bower
-    # - $(npm config get prefix)/bin/tsd
-    # - $(npm config get prefix)/bin/tslint
-    # - $(npm config get prefix)/bin/gulp
+  - node_modules
+  - client_node_modules
 addons:
   postgresql: '9.4'
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+    - ubuntu-toolchain-r-test
     packages:
-      - zsh
-      - g++-4.8
+    - zsh
+    - g++-4.8
+  sauce_connect:
+    sauce_connect: true
 env:
   global:
-    - CXX=g++-4.8
-    - secure: G8NSqBVJVX4mLrsWKDZh9eUMhlQrs/9z+9gAu8YC7mQ8ed0BlY4idrNI5vaD/+LsKSxEqhYO7U08Tn3KrtSo1sr7sSI47F1g/F8VCMXQW2eC89BiZh+9Td1qETvsW/jTFpF5QaQJBf5d6WBlpVp98KQOlLvUIL+Kyl08hhRmk/k=
+  - CXX=g++-4.8
+  - secure: G8NSqBVJVX4mLrsWKDZh9eUMhlQrs/9z+9gAu8YC7mQ8ed0BlY4idrNI5vaD/+LsKSxEqhYO7U08Tn3KrtSo1sr7sSI47F1g/F8VCMXQW2eC89BiZh+9Td1qETvsW/jTFpF5QaQJBf5d6WBlpVp98KQOlLvUIL+Kyl08hhRmk/k=
+  - secure: muRDA2OSmCjzlKmXThv58KpHW+LDCMRdFZpTv6JqjsosvaBaK0ep0meZgM0KZliIKVtktVZTXEZGDQrqRIrO09uXOf/t2/XmCZLzk1RJhwJQhL16J9YL5UrYwgHoHtTcHNYb1n/9Pc/u1+8niwHCuf1zUENplfXP+0s+TshXTcaBq5t5V6sUtr8V4Rdtg0yawMPn0cySLZkdNhQR8TFHo+GcaeF0LsxdbHjWQOYbMpsRozNg6a0kfWsN4uy3PRxQI/Sl9cY1gdjCWFzfeoLESqh8m7ezoyxauR+1j3VtOSeMw24wrdFOiew8T1qlXoo3Cwq6T22nI07/9GKuaOX8LsDDhEd1WkbOEVBUp8KpWnLtchmEPL7Q+clAfyIQ7D3znus4agRgj/R+t3om8R4cka42aNcoXrmIh/7CfOYBJh+RumCzIxiX1ZQRr0CgrDRtYICaQ4TFyADv/OXd3XR2qJ70BOV48rYTq4vQd9gk230tXvk9a72q5U0SyexqokS1XV4iyYHB9X2B2146t2hxYiukGD3NegiVlFY0rZ6Gxx5lptwb55hAJCMlmQwB82cyF68HLoyjARltipCi6R8V3EsBMZIT3yqpufH60e9mDoEx+h2lUn1O68GFMng6PiSAhNEQEenUEK70maq9p2rOjwWIIDc/W8uvSGIOPNzrTfg=
+  - secure: kmobRxY1z+NPAeJ2H9LijTXv569bszsAgjzbAxZ1+pZgplOg2RlZklsMPna8yVBD7jjzP+tpTEbznLE8liw3wgTCLL1foYNU98AF/2ZgHp9tWJoUgTt7VoW75APPcWvWN9a8P6TppVMmw2HntLgJDhxfsCcQn5cGnixnm2W9MbfDALvLRJpRJV+v7wwjzseMa+HIzvYphtL9+T7dGpQsdxkFiYrufMI/tH5H6ZOEPGgiPnJEhirTM4W327Wc/hvpRfGHM3d1SOZTPigYVqEYjVv7U9DDQYgerOzbsIGV7YzFR6skWNgGz7bWkf/CQhxAI7T85VBNwjVt3TTVfkaZkXNhuL7/AhTqhPXrBMWif9fPcxs47hkyd+DdYKfh/KCOjOvryZTYIlJ7gyLzNp/FaqENX+jpJ3JbOpSAh0ZN6t9GHk1R/HutPxO/6fq4pCJqBFAg6WrpjsyaLG8vAklyaA1qo5LzfL1P8YsWtQ/P0n1iknZhG09kBrHYQiDPpjLFGfcbH92HGJguugue3u9ZyDwjgbM143CMaM7Ofw+8YGnG3kCdfG91HYmfvoKaENhlizWf6Qr+U5mxPESZcWTFFwAmUycuwVZ9RRCUX6bGdT296rCKeIPPA99cFua+LfZClf3oTlmVp+5oapinWLNCqn8QJsdAkTH6Pn0Jbm8vbqY=
 before_install:
-  - export TZ=Europe/Zurich
-  - export CHROME_BIN=chromium-browser
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - git clone https://github.com/renuo/renuo-cms-api.git && (cd renuo-cms-api && git checkout $(cat ../renuo-cms-api-branch))
-  - git clone https://github.com/renuo/renuo-cms-client.git && (cd renuo-cms-client && git checkout $(cat ../renuo-cms-client-branch))
-  - mv client_node_modules renuo-cms-client/node_modules || echo 'cache does not exist'
-  - rm renuo-cms-client/npm-shrinkwrap.json
-  - nvm install
-  - npm install -g protractor
-  - webdriver-manager update --standalone --firefox
-  - webdriver-manager start 2>&1 &
-  - npm install -g bower tsd tslint gulp
+- export TZ=Europe/Zurich
+- git clone https://github.com/renuo/renuo-cms-api.git && (cd renuo-cms-api && git checkout $(cat ../renuo-cms-api-branch))
+- git clone https://github.com/renuo/renuo-cms-client.git && (cd renuo-cms-client && git checkout $(cat ../renuo-cms-client-branch))
+- mv client_node_modules renuo-cms-client/node_modules || echo 'cache does not exist'
+- rm renuo-cms-client/npm-shrinkwrap.json
+- nvm install
+- npm install -g protractor
+- webdriver-manager update --standalone --firefox
+- webdriver-manager start 2>&1 &
+- npm install -g bower tsd tslint gulp
 install:
-  - (cd renuo-cms-api && bundle install --without production development --deployment --jobs=3 --retry=3)
-  - (cd renuo-cms-client && npm install)
+- "(cd renuo-cms-api && bundle install --without production development --deployment --jobs=3 --retry=3)"
+- "(cd renuo-cms-client && npm install)"
 before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
-  - cp renuo-cms-api/config/database.travis.yml renuo-cms-api/config/database.yml
-  - cp renuo-cms-api/config/application.travis.yml renuo-cms-api/config/application.yml
-  - echo {\"token\":\"$TSDRC_TOKEN\"} > .tsdrc
-  - (cd renuo-cms-client && tsd reinstall --save --overwrite)
+- psql -c 'create database travis_ci_test;' -U postgres
+- cp renuo-cms-api/config/database.travis.yml renuo-cms-api/config/database.yml
+- cp renuo-cms-api/config/application.travis.yml renuo-cms-api/config/application.yml
+- echo {\"token\":\"$TSDRC_TOKEN\"} > .tsdrc
+- "(cd renuo-cms-client && tsd reinstall --save --overwrite)"
 script:
-  - cd renuo-cms-api && rails s &
-  - cd renuo-cms-client && gulp travis-serve &
-  - sleep 3
-  - (cd renuo-cms-client && protractor e2e/protractor-config.js)
-  #  - (cd renuo-cms-api && bin/check)
-  #  - (cd renuo-cms-client && npm test)
+- cd renuo-cms-api && rails s &
+- cd renuo-cms-client && gulp travis-serve &
+- sleep 3
+- "(cd renuo-cms-client && protractor e2e/protractor-config.js)"
 after_script: mv renuo-cms-client/node_modules client_node_modules
-
