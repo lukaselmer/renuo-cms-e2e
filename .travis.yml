@@ -29,6 +29,7 @@ before_install:
 - rm renuo-cms-client/npm-shrinkwrap.json
 - nvm install
 - npm install -g protractor
+- npm install -g typescript
 - webdriver-manager update --standalone --firefox
 - webdriver-manager start 2>&1 &
 - npm install -g bower tsd tslint gulp
