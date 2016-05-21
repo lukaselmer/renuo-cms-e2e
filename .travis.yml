@@ -34,15 +34,14 @@ before_install:
 - webdriver-manager start 2>&1 &
 - npm install -g bower tsd tslint gulp
 install:
-- "(cd renuo-cms-api && bundle install --without production development --deployment --jobs=3 --retry=3)"
-- (cd renuo-cms-api && bin/setup)
-- "(cd renuo-cms-client && npm install)"
+- "(cd renuo-cms-api && bin/setup)"
+- "(cd renuo-cms-client && bin/setup)"
 before_script:
 #- psql -c 'create database travis_ci_test;' -U postgres
 #- cp renuo-cms-api/config/database.travis.yml renuo-cms-api/config/database.yml
 - cp renuo-cms-api/config/application.travis.yml renuo-cms-api/config/application.yml
 - echo {\"token\":\"$TSDRC_TOKEN\"} > .tsdrc
-- "(cd renuo-cms-client && tsd reinstall --save --overwrite)"
+#- "(cd renuo-cms-client && tsd reinstall --save --overwrite)"
 script:
 - (cd renuo-cms-client && gulp travis-serve &)
 - (cd renuo-cms-api && gem install rails)
